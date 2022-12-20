@@ -1,0 +1,103 @@
+/* Main css */
+
+:root {
+
+  /* Basic colors*/
+  --main-text-color: rgb(58 58 58 / 80%);
+  --header-color: rgb(0 0 0 / 90%);
+  --purple-text: #9c27b0;
+
+  --box-shadow: 0 0 0 1px rgb(0 0 0 / 4%);
+  --hover-box-shadow:  0 0 10px 1px rgb(76 175 80 / 20%);
+}
+
+html, body {
+  font-family: system-ui, -apple-system, Rubik, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  color: var(--main-text-color);
+  -webkit-tap-highlight-color: transparent;
+  background: #f3f2ef;
+}
+
+/**
+ * Firefox specific rule
+ */
+@-moz-document url-prefix() {
+  body {
+    font-weight: lighter !important;
+  }
+}
+
+h6, h5, h4, h3, h2, h1 {
+  color: var(--header-color);
+  font-weight: 400;
+}
+/**
+ * Firefox specific rule
+ */
+@-moz-document url-prefix() {
+  h6, h5, h4, h3, h2, h1 {
+    font-weight: lighter !important;
+  }
+}
+
+h2 {
+  margin-bottom: 2rem;
+}
+
+h3 {
+  margin-bottom: 1rem;
+}
+
+h4 {
+  margin-bottom: 1rem;
+}
+
+h5 {
+  margin-bottom: .2rem;
+  transition: all 300ms;
+}
+
+p {
+  font-size: 1rem;
+  margin: 0;
+  margin-bottom: .5rem;
+}
+
+.container {
+    margin-top: .5rem;
+    max-width: 1140px;
+}
+
+.content {
+  visibility: visible;
+  opacity: 0;
+}
+
+h3::first-letter, h5::first-letter {
+  font-weight: 500;
+  color: var(--purple-text);
+  padding-right: .03rem;
+}
+
+.cart {
+  border: none;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  border-radius: 7px;
+  box-shadow: var(--box-shadow);
+  background: #fff;
+  transition: all 300ms;
+}
+
+.cart:hover {
+  box-shadow: var(--hover-box-shadow);
+}
+
+.cart p {
+  font-weight: 500;
+}
+
+.blue-text {
+  font-weight: 500;
+  color: #0a66c2;
+}
