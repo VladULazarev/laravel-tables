@@ -113,7 +113,7 @@ class OrderController extends Controller
         # Get last record (we need 'order_id' of this order)
         $lastRecord = Order::latest()->first();
 
-        return redirect()->route('orders.show', ['data' => $lastRecord->order_id ]);
+        return to_route('orders.show', ['data' => $lastRecord->order_id ]);
     }
 
    /**
@@ -136,7 +136,7 @@ class OrderController extends Controller
     public function delete(Order $data)
     {
         $data->delete();
-        return redirect()->route('orders.index');
+        return to_route('orders.index');
     }
 
     /**
