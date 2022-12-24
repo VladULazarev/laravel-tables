@@ -88,7 +88,7 @@ class CustomerController extends Controller
         # Validate the input and create
         $data->create($this->validateInput());
 
-        return redirect()->route('customers.show', ['data' => request('last_name') ]);
+        return to_route('customers.show', ['data' => request('last_name') ]);
     }
 
     /**
@@ -112,7 +112,7 @@ class CustomerController extends Controller
     {
         $data->delete();
 
-        return redirect()->route('customers.index');
+        return to_route('customers.index');
     }
 
     /**
