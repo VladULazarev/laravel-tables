@@ -20,187 +20,155 @@ Route::get('/clear', function () {
 Route::get('/', function () { return view('layouts.layout'); });
 
 // ---------------------------------------------------------------- Admin only
+
 Route::middleware('admin')->group(function () {
 
 // ----------------------------------------------------------------- Customers
 
-    # Find records by 'search' data (typing in the 'Search' field)
-    Route::post('/customers/search', [
-      CustomerController::class, 'searchRecords' ])->name('find-customers');
+    Route::controller(CustomerController::class)->group(function () {
 
-    # Show searching results by page (click a 'page' link)
-    Route::get('/customers/search', [
-      CustomerController::class, 'getRecordsByClickingPageLinks' ]);
+                # Find records by 'search' data (typing in the 'Search' field)
+        Route::post('/customers/search', 'searchRecords')->name('find-customers');
 
-    # Show all records
-    Route::get('/customers', [
-      CustomerController::class, 'index' ])->name('customers.index');
+        # Show searching results by page (click a 'page' link)
+        Route::get('/customers/search', 'getRecordsByClickingPageLinks');
 
-    # Store a new record
-    Route::post('/customers', [
-      CustomerController::class, 'store' ])->name('store-customer');
+        # Show all records
+        Route::get('/customers', 'index')->name('customers.index');
 
-    # Show the view to create a new record
-    Route::get('/customers/create', [
-      CustomerController::class, 'create' ])->name('customers.create');
+        # Store a new record
+        Route::post('/customers', 'store' )->name('store-customer');
 
-    # Show a record
-    Route::get('/customers/{data}', [
-      CustomerController::class, 'show' ])->name('customers.show');
+        # Show the view to create a new record
+        Route::get('/customers/create', 'create')->name('customers.create');
 
-    # Show the view to edit a record
-    Route::get('/customers/{data}/edit', [
-      CustomerController::class, 'edit' ])->name('customers.edit');
+        # Show a record
+        Route::get('/customers/{data}', 'show')->name('customers.show');
 
-    # Update a record
-    Route::put('/customers/{data}', [
-      CustomerController::class, 'update' ])->name('update-customer');
+        # Show the view to edit a record
+        Route::get('/customers/{data}/edit', 'edit')->name('customers.edit');
 
-    # Show the view to delete a record
-    Route::get('/customers/{data}/destroy', [
-      CustomerController::class, 'destroy' ])->name('customers.destroy');
+        # Update a record
+        Route::put('/customers/{data}', 'update')->name('update-customer');
 
-    # Delete a record
-    Route::delete('/customers/{data}', [
-      CustomerController::class, 'delete' ])->name('delete-customer');
+        # Show the view to delete a record
+        Route::get('/customers/{data}/destroy', 'destroy')->name('customers.destroy');
 
+        # Delete a record
+        Route::delete('/customers/{data}', 'delete')->name('delete-customer');
+    });
 
 // ------------------------------------------------------------------ Products
 
-    # Show all orders by a current 'customer'
-    Route::get('/orders/customer/{data}', [
-      OrderController::class, 'ordersByCustomer' ])->name('orders-by-customer.index');
+    Route::controller(ProductController::class)->group(function () {
 
-    # Find records by 'search' data (typing in the 'Search' field)
-    Route::post('/products/search', [
-      ProductController::class, 'searchRecords' ]);
+        # Show all orders by a current 'customer'
+        Route::get('/orders/customer/{data}', 'ordersByCustomer')->name('orders-by-customer.index');
 
-    # Show searching results by page (click a 'page' link)
-    Route::get('/products/search', [
-      ProductController::class, 'getRecordsByClickingPageLinks' ]);
+        # Find records by 'search' data (typing in the 'Search' field)
+        Route::post('/products/search', 'searchRecords');
 
-    # Show all records
-    Route::get('/products', [
-      ProductController::class, 'index' ])->name('products.index');
+        # Show searching results by page (click a 'page' link)
+        Route::get('/products/search', 'getRecordsByClickingPageLinks');
 
-    # Store a new record
-    Route::post('/products', [
-      ProductController::class, 'store' ])->name('store-products');
+        # Show all records
+        Route::get('/products', 'index')->name('products.index');
 
-    # Show the view to create a new record
-    Route::get('/products/create', [
-      ProductController::class, 'create' ])->name('products.create');
+        # Store a new record
+        Route::post('/products', 'store')->name('store-products');
 
-    # Show a record
-    Route::get('/products/{data}', [
-      ProductController::class, 'show' ])->name('products.show');
+        # Show the view to create a new record
+        Route::get('/products/create', 'create')->name('products.create');
 
-    # Show the view to edit a record
-    Route::get('/products/{data}/edit', [
-      ProductController::class, 'edit' ])->name('products.edit');
+        # Show a record
+        Route::get('/products/{data}', 'show')->name('products.show');
 
-    # Update a record
-    Route::put('/products/{data}', [
-      ProductController::class, 'update' ])->name('update-products');
+        # Show the view to edit a record
+        Route::get('/products/{data}/edit', 'edit')->name('products.edit');
 
-    # Show the view to delete a record
-    Route::get('/products/{data}/destroy', [
-      ProductController::class, 'destroy' ])->name('products.destroy');
+        # Update a record
+        Route::put('/products/{data}', 'update')->name('update-products');
 
-    # Delete a record
-    Route::delete('/products/{data}', [
-      ProductController::class, 'delete' ])->name('delete-products');
+        # Show the view to delete a record
+        Route::get('/products/{data}/destroy', 'destroy')->name('products.destroy');
 
+        # Delete a record
+        Route::delete('/products/{data}', 'delete')->name('delete-products');
+    });
 
 // -------------------------------------------------------------------- Orders
 
-    # Find records by 'search' data (typing in the 'Search' field)
-    Route::post('/orders/search', [
-      OrderController::class, 'searchRecords' ]);
+    Route::controller(OrderController::class)->group(function () {
 
-    # Show searching results by page (click a 'page' link)
-    Route::get('/orders/search', [
-      OrderController::class, 'getRecordsByClickingPageLinks' ]);
+        # Find records by 'search' data (typing in the 'Search' field)
+        Route::post('/orders/search', 'searchRecords');
 
-    # Show all records
-    Route::get('/orders', [
-      OrderController::class, 'index' ])->name('orders.index');
+        # Show searching results by page (click a 'page' link)
+        Route::get('/orders/search', 'getRecordsByClickingPageLinks');
 
-    # Store a new record
-    Route::post('/orders', [
-      OrderController::class, 'store' ])->name('store-orders');
+        # Show all records
+        Route::get('/orders', 'index')->name('orders.index');
 
-    # Show the view to create a new record
-    Route::get('/orders/create', [
-      OrderController::class, 'create' ])->name('orders.create');
+        # Store a new record
+        Route::post('/orders', 'store')->name('store-orders');
 
-    # Show a record
-    Route::get('/orders/{data}', [
-      OrderController::class, 'show' ])->name('orders.show');
+        # Show the view to create a new record
+        Route::get('/orders/create', 'create')->name('orders.create');
 
-    # Show the view to edit a record
-    Route::get('/orders/{data}/edit', [
-      OrderController::class, 'edit' ])->name('orders.edit');
+        # Show a record
+        Route::get('/orders/{data}', 'show')->name('orders.show');
 
-    # Update a record
-    Route::put('/orders/{data}', [
-      OrderController::class, 'update' ])->name('update-orders');
+        # Show the view to edit a record
+        Route::get('/orders/{data}/edit', 'edit')->name('orders.edit');
 
-    # Show the view to delete a record
-    Route::get('/orders/{data}/destroy', [
-      OrderController::class, 'destroy' ])->name('orders.destroy');
+        # Update a record
+        Route::put('/orders/{data}', 'update')->name('update-orders');
 
-    # Delete a record
-    Route::delete('/orders/{data}', [
-      OrderController::class, 'delete' ])->name('delete-orders');
+        # Show the view to delete a record
+        Route::get('/orders/{data}/destroy', 'destroy')->name('orders.destroy');
 
+        # Delete a record
+        Route::delete('/orders/{data}', 'delete')->name('delete-orders');
+    });
 
 // ---------------------------------------------------------------- Categories
 
-    # Find records by 'search' data (typing in the 'Search' field)
-    Route::post('/categories/search', [
-      CategoryController::class, 'searchRecords' ])->name('find-categories');
+    Route::controller(CategoryController::class)->group(function () {
 
-    # Show searching results by page (click a 'pager' link)
-    Route::get('/categories/search', [
-      CategoryController::class, 'getRecordsByClickingPageLinks' ]);
+        # Find records by 'search' data (typing in the 'Search' field)
+        Route::post('/categories/search', 'searchRecords')->name('find-categories');
 
-    # Show all records
-    Route::get('/categories', [
-      CategoryController::class, 'index' ])->name('categories.index');
+        # Show searching results by page (click a 'pager' link)
+        Route::get('/categories/search', 'getRecordsByClickingPageLinks');
 
-    # Store a new record
-    Route::post('/categories', [
-      CategoryController::class, 'store' ])->name('store-category');
+        # Show all records
+        Route::get('/categories', 'index')->name('categories.index');
 
-    # Show the view to create a new record
-    Route::get('/categories/create', [
-      CategoryController::class, 'create' ])->name('categories.create');
+        # Store a new record
+        Route::post('/categories', 'store')->name('store-category');
 
-    # Show a record
-    Route::get('/categories/{data}', [
-      CategoryController::class, 'show' ])->name('categories.show');
+        # Show the view to create a new record
+        Route::get('/categories/create', 'create')->name('categories.create');
 
-    # Show the view to edit a record
-    Route::get('/categories/{data}/edit', [
-      CategoryController::class, 'edit' ])->name('categories.edit');
+        # Show a record
+        Route::get('/categories/{data}', 'show')->name('categories.show');
 
-    # Update a record
-    Route::put('/categories/{data}', [
-      CategoryController::class, 'update' ])->name('update-category');
+        # Show the view to edit a record
+        Route::get('/categories/{data}/edit', 'edit')->name('categories.edit');
 
-    # Show the view to delete a record
-    Route::get('/categories/{data}/destroy', [
-      CategoryController::class, 'destroy' ])->name('categories.destroy');
+        # Update a record
+        Route::put('/categories/{data}', 'update')->name('update-category');
 
-    # Delete a record
-    Route::delete('/categories/{data}', [
-      CategoryController::class, 'delete' ])->name('delete-category');
+        # Show the view to delete a record
+        Route::get('/categories/{data}/destroy', 'destroy')->name('categories.destroy');
+
+        # Delete a record
+        Route::delete('/categories/{data}', 'delete')->name('delete-category');
+    });
 
 // --------------------------------------------------------- Set session values
 
-    Route::post('/set-session', [
-      SessionController::class, 'setSession' ]);
+    Route::post('/set-session', [SessionController::class, 'setSession' ]);
 
 }); # end Admin only
 
