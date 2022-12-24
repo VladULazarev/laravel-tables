@@ -77,7 +77,7 @@ class CategoryController extends Controller
         # Validate the input and create
         $data->create($this->validateInputAndUniqueness());
 
-        return redirect()->route('categories.show', [ 'data' => request('category_url_name') ]);
+        return to_route('categories.show', [ 'data' => request('category_url_name') ]);
     }
 
     /**
@@ -108,7 +108,7 @@ class CategoryController extends Controller
     public function delete(Category $data)
     {
         $data->delete();
-        return redirect()->route('categories.index');
+        return to_route('categories.index');
     }
 
     /**
