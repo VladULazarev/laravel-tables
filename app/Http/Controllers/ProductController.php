@@ -110,7 +110,7 @@ class ProductController extends Controller
         # Validate the input and create
         $data->create($this->validateInputAndUniqueness());
 
-        return redirect()->route('products.show', [ 'data' => request('product_url_name') ]);
+        return to_route('products.show', [ 'data' => request('product_url_name') ]);
     }
 
    /**
@@ -133,7 +133,7 @@ class ProductController extends Controller
     public function delete(Product $data)
     {
         $data->delete();
-        return redirect()->route('products.index');
+        return to_route('products.index');
     }
 
     /**
